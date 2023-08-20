@@ -2,7 +2,7 @@
 <project version="4">
   <component name="DBNavigator.Project.DataEditorManager">
     <record-view-column-sorting-type value="BY_INDEX" />
-    <value-preview-text-wrapping value="true" />
+    <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
   </component>
   <component name="DBNavigator.Project.DatabaseBrowserManager">
@@ -12,25 +12,50 @@
     <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="43edad68-6d52-40c4-b328-8a11ef8f10dc">
-      <console name="Connection" type="STANDARD" schema="telegram_bot" session="Main" />
+    <connection id="fcbc1df5-31d6-4dcf-b4e0-2e20ffb89c75">
+      <console name="telegram_bots" type="STANDARD" schema="telegram_bots" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="fcbc1df5-31d6-4dcf-b4e0-2e20ffb89c75" object-ref="schemas/public/tables/databasechangelog" />
+      <object connection-id="fcbc1df5-31d6-4dcf-b4e0-2e20ffb89c75" object-ref="schemas/public/tables/databasechangeloglock" />
+      <object connection-id="fcbc1df5-31d6-4dcf-b4e0-2e20ffb89c75" object-ref="schemas/public/tables/notification_task" />
+    </open-files>
+  </component>
+  <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="fcbc1df5-31d6-4dcf-b4e0-2e20ffb89c75" dataset="public.databasechangeloglock" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="fcbc1df5-31d6-4dcf-b4e0-2e20ffb89c75" dataset="public.notification_task" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="fcbc1df5-31d6-4dcf-b4e0-2e20ffb89c75" dataset="public.databasechangelog" active-filter-id="EMPTY_FILTER" />
+  </component>
+  <component name="DBNavigator.Project.ExecutionManager">
+    <retain-sticky-names value="false" />
+  </component>
+  <component name="DBNavigator.Project.MethodExecutionManager">
+    <method-browser />
+    <execution-history>
+      <group-entries value="true" />
+      <execution-inputs />
+    </execution-history>
+    <argument-values-cache />
   </component>
   <component name="DBNavigator.Project.ObjectQuickFilterManager">
     <last-used-operator value="EQUAL" />
     <filters />
   </component>
+  <component name="DBNavigator.Project.ScriptExecutionManager" clear-outputs="true">
+    <recently-used-interfaces>
+      <mapping database-type="POSTGRES" interface-id="7a9d3366-d0a5-4724-a525-48212b979c42" />
+    </recently-used-interfaces>
+  </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="43edad68-6d52-40c4-b328-8a11ef8f10dc" active="true" signed="true">
+      <connection id="fcbc1df5-31d6-4dcf-b4e0-2e20ffb89c75" active="true" signed="true">
         <database>
-          <name value="Connection" />
+          <name value="telegram_bots" />
           <description value="" />
           <database-type value="POSTGRES" />
           <config-type value="BASIC" />
@@ -41,12 +66,12 @@
           <url-type value="DATABASE" />
           <host value="localhost" />
           <port value="5432" />
-          <database value="telegram_bot" />
+          <database value="telegram_bots" />
           <tns-folder value="" />
           <tns-profile value="" />
           <type value="USER_PASSWORD" />
-          <user value="telegram_bot_user" />
-          <deprecated-pwd value="" />
+          <user value="telegram_bot_user_1" />
+          <deprecated-pwd value="dGVs" />
         </database>
         <properties>
           <auto-commit value="false" />
@@ -83,7 +108,7 @@
           <max-connection-pool-size value="7" />
           <alternative-statement-delimiter value="" />
         </details>
-        <object-filters hide-empty-schemas="false" hide-pseudo-columns="false">
+        <object-filters hide-empty-schemas="false" hide-pseudo-columns="true">
           <object-type-filter>
             <object-type name="SCHEMA" enabled="true" />
             <object-type name="USER" enabled="true" />
@@ -432,7 +457,9 @@
         <prompt-execution value="false" />
       </statement-execution>
       <script-execution>
-        <command-line-interfaces />
+        <command-line-interfaces>
+          <value id="7a9d3366-d0a5-4724-a525-48212b979c42" name="PostgreSQL terminal" executable-path="$PROJECT_DIR$/src/main/resources/liquibase/script.sql" database-type="POSTGRES" />
+        </command-line-interfaces>
         <execution-timeout value="300" />
       </script-execution>
       <method-execution>
@@ -512,5 +539,8 @@
         </visibility-settings>
       </environment>
     </general-settings>
+  </component>
+  <component name="DBNavigator.Project.StatementExecutionManager">
+    <execution-variables />
   </component>
 </project>
