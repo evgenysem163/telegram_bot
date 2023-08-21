@@ -7,11 +7,11 @@ import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.response.SendResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import pro.sky.telegrambot.entity.NotificationTask;
 import pro.sky.telegrambot.repositories.NotificationTaskRepository;
+import pro.sky.telegrambot.service.TelegramBotService;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
@@ -24,30 +24,31 @@ import java.util.regex.Pattern;
 public class TelegramBotUpdatesListener implements UpdatesListener {
 
     private Logger logger = LoggerFactory.getLogger(TelegramBotUpdatesListener.class);
-    @Autowired
-    private TelegramBot telegramBot;
 
+    private final TelegramBot telegramBot;
 
-    @Autowired
-    pro.sky.telegrambot.listener.Scheduled scheduled;
+    private final TelegramBotService telegramBotService;
 
+    private final NotificationTaskRepository notificationTaskRepository;
+
+    public TelegramBotUpdatesListener(TelegramBot telegramBot, TelegramBotService telegramBotService, NotificationTaskRepository notificationTaskRepository) {
+        this.telegramBot = telegramBot;
+        this.telegramBotService = telegramBotService;
+        this.notificationTaskRepository = notificationTaskRepository;
+    }
 
     @PostConstruct
     public void init() {
         telegramBot.setUpdatesListener(this);
     }
 
-    @Autowired
-    private NotificationTaskRepository notificationTaskRepository;
-
     @Override
     public int process(List<Update> updates) {
         updates.forEach(update -> {
             logger.info("Processing update: {}", update);
             if(update.message().text().equals("/start")){
-                SendMessage sendMessage = new SendMessage(update.message().chat().id(),
+                telegramBotService.sendMessage(update.message().chat().id(),
                         "Привет " + update.message().from().firstName() + " Добро пожаловать!");
-                SendResponse sendResponse = telegramBot.execute(sendMessage);
             }
             else {
                 String text = update.message().text();
@@ -67,12 +68,5 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
         });
         return UpdatesListener.CONFIRMED_UPDATES_ALL;
     }
-    @Scheduled(fixedRate = 6000)
-    public void checkTask() {
-        scheduled.runTasks()
-                .forEach(f -> {
-                    SendMessage message = new SendMessage(f.getChatId(), f.getMessageText());
-                    SendResponse response = telegramBot.execute(message);
-                });
-    }
+
 }
